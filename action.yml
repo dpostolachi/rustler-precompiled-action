@@ -57,7 +57,7 @@ runs:
         echo "RUSTLER_NIF_VERSION=${{ inputs.nif-version }}" >> $GITHUB_ENV
 
     - name: Download cross from GitHub releases
-      uses: giantswarm/install-binary-action@v1.1.0
+      uses: dpostolachi/install-binary-action@main
       if: ${{ inputs.use-cross }}
       with:
         binary: "cross"
