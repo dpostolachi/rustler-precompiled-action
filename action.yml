@@ -58,7 +58,7 @@ runs:
 
     - name: Download cross from GitHub releases
       uses: dpostolachi/install-binary-action@master
-      if: inputs.use-cross
+      if: inputs.use-cross == "true"
       with:
         binary: "cross"
         version: ${{ inputs.cross-version }}
