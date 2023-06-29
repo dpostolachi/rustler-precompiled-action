@@ -77,9 +77,6 @@ runs:
         rustc -V
         rustc --print=cfg
         echo "env RUSTLER_NIF_VERSION=$RUSTLER_NIF_VERSION"
-        podman -v || brew install podman
-        podman machine init
-        podman machine start
 
     - name: Build
       shell: bash
