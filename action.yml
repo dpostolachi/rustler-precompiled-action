@@ -57,7 +57,7 @@ runs:
         echo "RUSTLER_NIF_VERSION=${{ inputs.nif-version }}" >> $GITHUB_ENV
 
     - name: Download cross from GitHub releases
-      uses: dpostolachi/install-binary-action@main
+      uses: dpostolachi/install-binary-action@master
       if: ${{ inputs.use-cross }}
       with:
         binary: "cross"
