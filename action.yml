@@ -110,7 +110,7 @@ runs:
             docker build . -f ${{ inputs.docker-image }} -t ${{ inputs.target }}
             docker run -v ./target:/app/target ${{ inputs.target }}
           else
-            cross build --release --target=${{ inputs.target }}
+            cargo build --release --target=${{ inputs.target }}
           fi
         fi
 
