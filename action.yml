@@ -26,6 +26,10 @@ inputs:
     description: The NIF version that we are aiming to.
     default: "2.16"
     required: false
+  docker-image:
+    description: Use docker image for build
+    default: false
+    required: false
   project-dir:
     description: >
       A relative path where the project is located.
@@ -58,7 +62,7 @@ runs:
 
     - name: Download cross from GitHub releases
       uses: dpostolachi/install-binary-action@master
-      if: inputs.use-cross == 'true'
+      if: inputs.use-cross == true
       with:
         binary: "cross"
         version: ${{ inputs.cross-version }}
@@ -95,9 +99,17 @@ runs:
             exit 1
           fi
 
-          cross build --release --target=${{ inputs.target }}
+          if [ "${{ inputs.docker-image }}" != "false" ]; then
+            docker build . -f ${{ inputs.docker-image }} -t ${{ inputs.target }}
+          else
+            cross build --release --target=${{ inputs.target }}
+          fi
         else
-          cargo build --release --target=${{ inputs.target }}
+          if [ "${{ inputs.docker-image }}" != "false" ]; then
+            docker build . -f ${{ inputs.docker-image }} -t ${{ inputs.target }}
+          else
+            cross build --release --target=${{ inputs.target }}
+          fi
         fi
 
         cd "$INITIAL_DIR"
