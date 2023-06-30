@@ -100,15 +100,19 @@ runs:
           fi
 
           if [ "${{ inputs.docker-image }}" != "false" ]; then
-            docker build . --no-cache -f ${{ inputs.docker-image }} -t ${{ inputs.target }}
-            docker run -v ./target:/app/target ${{ inputs.target }}
+            docker build . -f ${{ inputs.docker-image }} -t ${{ inputs.target }}
+            docker run -v target:/app/target ${{ inputs.target }}
+            ls
+            ls target
           else
             cross build --release --target=${{ inputs.target }}
           fi
         else
           if [ "${{ inputs.docker-image }}" != "false" ]; then
-            docker build . --no-cache -f ${{ inputs.docker-image }} -t ${{ inputs.target }}
-            docker run -v ./target:/app/target ${{ inputs.target }}
+            docker build . -f ${{ inputs.docker-image }} -t ${{ inputs.target }}
+            docker run -v target:/app/target ${{ inputs.target }}
+            ls
+            ls target
           else
             cross build --release --target=${{ inputs.target }}
           fi
