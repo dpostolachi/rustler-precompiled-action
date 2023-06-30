@@ -100,13 +100,15 @@ runs:
           fi
 
           if [ "${{ inputs.docker-image }}" != "false" ]; then
-            docker build . -f ${{ inputs.docker-image }} -t native/lvips/${{ inputs.target }}
+            docker build . -f ${{ inputs.docker-image }} -t ${{ inputs.target }}
+            docker run -v ./target:/app/target ${{ inputs.target }}
           else
             cross build --release --target=${{ inputs.target }}
           fi
         else
           if [ "${{ inputs.docker-image }}" != "false" ]; then
-            docker build . -f ${{ inputs.docker-image }} -t native/lvips${{ inputs.target }}
+            docker build . -f ${{ inputs.docker-image }} -t ${{ inputs.target }}
+            docker run -v ./target:/app/target ${{ inputs.target }}
           else
             cross build --release --target=${{ inputs.target }}
           fi
