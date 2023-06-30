@@ -28,7 +28,7 @@ inputs:
     required: false
   docker-image:
     description: Use docker image for build
-    default: false
+    default: ''
     required: false
   project-dir:
     description: >
@@ -99,7 +99,7 @@ runs:
             exit 1
           fi
 
-          if [ "${{ inputs.docker-image }}" != "false" ]; then
+          if [ "${{ inputs.docker-image }}" != "" ]; then
             docker build . -f ${{ inputs.docker-image }} -t ${{ inputs.target }}
             docker run -v ./target:/app/target ${{ inputs.target }}
             ls
@@ -108,7 +108,7 @@ runs:
             cross build --release --target=${{ inputs.target }}
           fi
         else
-          if [ "${{ inputs.docker-image }}" != "false" ]; then
+          if [ "${{ inputs.docker-image }}" != "" ]; then
             docker build . -f ${{ inputs.docker-image }} -t ${{ inputs.target }}
             docker run -v ./target:/app/target ${{ inputs.target }}
             ls
