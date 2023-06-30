@@ -102,8 +102,6 @@ runs:
           if [ "${{ inputs.docker-image }}" != "" ]; then
             docker build . -f ${{ inputs.docker-image }} -t ${{ inputs.target }}
             docker run -v ./target:/app/target ${{ inputs.target }}
-            ls
-            ls target
           else
             cross build --release --target=${{ inputs.target }}
           fi
@@ -111,8 +109,6 @@ runs:
           if [ "${{ inputs.docker-image }}" != "" ]; then
             docker build . -f ${{ inputs.docker-image }} -t ${{ inputs.target }}
             docker run -v ./target:/app/target ${{ inputs.target }}
-            ls
-            ls target
           else
             cross build --release --target=${{ inputs.target }}
           fi
