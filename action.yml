@@ -122,6 +122,7 @@ runs:
       run: |
         INITIAL_DIR=$(pwd)
 
+        echo "Version:${{ inputs.project-version }}"
         echo "Going from path: $INITIAL_DIR"
         echo "To path: ${{ inputs.project-dir }}"
 
